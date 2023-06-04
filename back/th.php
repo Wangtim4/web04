@@ -10,20 +10,10 @@
     <input type="text" name="mid" id="mid">
     <button onclick="addType('mid')">新增</button>
 </div>
+<div id="typeList">
+    
+</div>
 
-<table class="all">
-    <tr class="tt">
-        <th>名稱</th>
-        <th>操作</th>
-    </tr>
-    <tr class="pp">
-        <td>名稱</td>
-        <td>
-            <button>修改</button>
-            <button>刪除</button>
-        </td>
-    </tr>
-</table>
 
 
 <h2 class="ct">商品管理</h2>
@@ -43,7 +33,6 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
         <td>
             <button>修改</button>
             <button>刪除</button>
@@ -54,30 +43,39 @@
 </table>
 
 <script>
+    typeList();
     bigtypes();
     function addType(type){
         let name,parent;
         switch(type){
             case 'big':
-                name=$('#big').val();
+                name=$("#big").val();
                 parent=0;
-                break;
+            break;
             case 'mid':
-                name=$('#mid').val();
-                parent=$('#bigtype').val();
-                break;
+                name=$("#mid").val();
+                parent=$("#bigtype").val();
+            break;
         }
-        // console.log(name,parent);
         $.post("./api/save_type.php",{name,parent},()=>{
-            // console.log(res);
             bigtypes();
-            $('#big,#mid').val('')
-        }) 
-        }
+            $("#big,#mid").val('')
+            typeList();
+        })
+    }
 
-        function bigtypes(){
-            $.get("./api/get_type.php",{type:'big',parent:0},(options)=>{
-                $('#bigtype').html(options)
-            })
-        }
+    function typeList() {
+        $.get('./api/type_list.php', (list) => {
+            $('#typeList').html(list);
+        })
+    }
+
+    function bigtypes() {
+        $.get("./api/get_type.php", {
+            type: 'big',
+            parent: 0
+        }, (options) => {
+            $('#bigtype').html(options)
+        })
+    }
 </script>
