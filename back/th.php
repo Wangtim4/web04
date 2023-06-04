@@ -2,13 +2,13 @@
 <div class="ct">
     新增大分類
     <input type="text" name="big" id="big">
-    <button>新增</button>
+    <button onclick="addType('big')">新增</button>
 </div>
 <div class="ct">
     新增中分類
     <select name="bigtype" id="bigtype"></select>
     <input type="text" name="mid" id="mid">
-    <button>新增</button>
+    <button onclick="addType('mid')">新增</button>
 </div>
 
 <table class="all">
@@ -52,3 +52,32 @@
         </td>
     </tr>
 </table>
+
+<script>
+    bigtypes();
+    function addType(type){
+        let name,parent;
+        switch(type){
+            case 'big':
+                name=$('#big').val();
+                parent=0;
+                break;
+            case 'mid':
+                name=$('#mid').val();
+                parent=$('#bigtype').val();
+                break;
+        }
+        // console.log(name,parent);
+        $.post("./api/save_type.php",{name,parent},()=>{
+            // console.log(res);
+            bigtypes();
+            $('#big,#mid').val('')
+        }) 
+        }
+
+        function bigtypes(){
+            $.get("./api/get_type.php",{type:'big',parent:0},(options)=>{
+                $('#bigtype').html(options)
+            })
+        }
+</script>
