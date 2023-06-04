@@ -46,4 +46,24 @@
             }
         })
     }
+
+    function reg(){
+        let user = {
+            acc:$('#acc').val(),
+            pw:$('#pw').val(),
+            name:$('#name').val(),
+            addr:$('#addr').val(),
+            email:$('#email').val(),
+            tel:$('#tel').val(),
+        }
+        $.post('./api/chk_acc.php',{table:'mem',acc:user.acc},(chk)=>{
+            if(parseInt(chk)===1 || user.acc==='admin'){
+                alert("此帳號已註冊，請重新輸入");
+            }else{
+                $.post('./api/reg.php',user,()=>{
+                    location.href='index.php?do=login';
+                })
+            }
+        })
+    }
 </script>
