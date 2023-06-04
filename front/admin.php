@@ -1,18 +1,25 @@
-<div class="ct">
-    <button>新增管理員</button>
-</div>
 <table class="all">
-    <tr class="tt ct">
-        <th>帳號</th>
-        <th>密碼</th>
-        <th>管理</th>
+    <tr>
+        <td class="tt ct">帳號</td>
+        <td class="pp"><input type="text" name="acc" id="acc"></td>
     </tr>
-    <tr class="pp ct">
-        <td></td>
-        <td></td>
-        <td></td>
+    <tr>
+        <td class="tt ct">密碼</td>
+        <td class="pp"><input type="text" name="pw" id="pw"></td>
+    </tr>
+    <tr>
+        <td class="tt ct">驗證碼</td>
+        <td class="pp">
+            <?php
+            $a = rand(10, 99);
+            $b = rand(10, 99);
+            echo $a . '+' . $b . '=';
+            $_SESSION['ans'] = $a + $b;
+            ?>
+            <input type="text" name="code" id="code">
+        </td>
     </tr>
 </table>
 <div class="ct">
-    <button onclick="location.href='index.php'">返回</button>
+    <button onclick="login('admin')">確認</button>
 </div>
