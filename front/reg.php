@@ -39,7 +39,7 @@
     function chkAcc(){
         let acc=$("#acc").val();
         $.post("./api/chk_acc.php",{table:'mem',acc},(chk)=>{
-            if(parseInt(chk)===1){
+            if(parseInt(chk)===1 || acc==='admin'){
                 alert("此帳號已註冊，請重新輸入");
             }else{
                 alert("此帳號可註冊");
