@@ -59,3 +59,19 @@ foreach($_SESSION['cart'] as $id => $qt){
     <button onclick="checkout()">確認送出</button>
     <button onclick="location.href='?do=buycart'">返回修改</button>
 </div>
+
+<script>
+    function checkout(){
+        let form = {
+            name:$('#name').val(),
+            email:$('#email').val(),
+            addr:$('#addr').val(),
+            tel:$('#tel').val(),
+            total:<?=$sum;?>,
+        }
+        $.post('./api/save_order.php',form,(res)=>{
+            console.log(res);
+            alert('訂購成功');
+        })
+    }
+</script>
