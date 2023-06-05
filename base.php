@@ -6,7 +6,7 @@ session_start();
 class DB
 {
     protected $table;
-    protected $dsn='mysql:host=localhost;charset=utf8;dbname=db10';
+    protected $dsn='mysql:host=localhost;charset=utf8;dbname=db11';
     protected $pdo;
 
     function __construct($table)
