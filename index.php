@@ -22,7 +22,7 @@ include_once "./base.php";
                                 <img src="./icon/0416.jpg">
                         </a>
                         <div style="padding:10px;">
-                                <a href="?">回首頁</a> |
+                                <a href="index.php">回首頁</a> |
                                 <a href="?do=news">最新消息</a> |
                                 <a href="?do=look">購物流程</a> |
                                 <a href="?do=buycart">購物車</a> |
