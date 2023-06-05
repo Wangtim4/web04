@@ -1,13 +1,15 @@
 <?php
-if(isset($_GET['id'])){
-
-    $_SESSION['cart'][$_GET['id']]=$_GET['qt'];
-}
-
+// 判斷是否為會員
 if(!isset($_SESSION['mem'])){
     to("?do=login");
 }
 
+// 判斷是購買哪個商品的id
+if(isset($_GET['id'])){
+    $_SESSION['cart'][$_GET['id']]=$_GET['qt'];
+}
+
+// 判斷是否有購物
 if(empty($_SESSION['cart'])){
     echo "<h2 class='ct'>購物車為空</h2>";
 }else{
@@ -29,8 +31,6 @@ if(empty($_SESSION['cart'])){
 foreach($_SESSION['cart'] as $id => $qt){
     $row = $Goods->find($id);
 ?>
-
-
     <tr class="pp ct">
         <td><?=$row['no'];?></td>
         <td><?=$row['name'];?></td>
