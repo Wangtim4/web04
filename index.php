@@ -39,33 +39,52 @@ include_once "./base.php";
                                 };
                                 ?>
 
-                                
+
                         </div>
                         <marquee>情人節特惠活動 &nbsp; 為了慶祝七夕情人節，將舉辦情人兩人到現場有七七折之特惠活動~</marquee>
 
                 </div>
                 <div id="left" class="ct">
                         <div style="min-height:400px;">
-                        </div>
-                        <span>
-                                <div>進站總人數</div>
-                                <div style="color:#f00; font-size:28px;">
-                                        00005 </div>
-                        </span>
+                                <div class="ww">
+                                        <a href="?type=0">全部商品</a>
+                                </div>
+
+                                <?php
+                                $bigs = $Type->all(['parent' => 0]);
+                                foreach ($bigs as $big) {
+                                        echo "<div class='ww'><a href='?type={$big['id']}'>{$big['name']}</a>";
+
+                                                $mids = $Type->all(['parent' => $big['id']]);
+                                                if (!empty($mids)) {
+                                                foreach ($mids as $mid) {
+                                                        echo "<div class='s'><a href='?type={$mid['id']}'>{$mid['name']}</a></div>";
+                                                }
+                                        }
+                                echo "</div>";
+                
+                                }
+                ?>
                 </div>
-                <div id="right">
-                        <?php
-                        $do = $_GET['do'] ?? 'main';
-                        $file = './front/' . $do . '.php';
-                        if (file_exists($file)) {
-                                include $file;
-                        } else {
-                                include "./front/main.php";
-                        }
-                        ?>
-                </div>
-                <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
-                        <?= $Bot->find(1)['bot']; ?></div>
+                <span>
+                        <div>進站總人數</div>
+                        <div style="color:#f00; font-size:28px;">
+                                00005 </div>
+                </span>
+        </div>
+        <div id="right">
+                <?php
+                $do = $_GET['do'] ?? 'main';
+                $file = './front/' . $do . '.php';
+                if (file_exists($file)) {
+                        include $file;
+                } else {
+                        include "./front/main.php";
+                }
+                ?>
+        </div>
+        <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
+                <?= $Bot->find(1)['bot']; ?></div>
         </div>
 
 </body>
