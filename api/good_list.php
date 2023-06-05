@@ -22,8 +22,8 @@ include_once "../base.php";
             <td>
                 <button>修改</button>
                 <button onclick="del('goods',<?=$row['id'];?>)">刪除</button>
-                <button onclick="sh(<?=$row['name'];?>),'on'">上架</button>
-                <button onclick="sh(<?=$row['name'];?>),'on'">下架</button>
+                <button onclick="sh(<?=$row['id'];?>,1)">上架</button>
+                <button onclick="sh(<?=$row['id'];?>,0)">下架</button>
             </td>
         </tr>
     <?php
@@ -31,3 +31,12 @@ include_once "../base.php";
     ?>
 
 </table>
+
+<script>
+    function sh(id,sh){
+        $.post('./api/sh.php',{id,sh},(res)=>{
+            console.log(res);
+            
+        })
+    }
+</script>
