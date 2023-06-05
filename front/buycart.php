@@ -1,10 +1,18 @@
 <?php
+if(isset($_GET['id'])){
+
+    $_SESSION['cart'][$_GET['id']]=$_GET['qt'];
+}
+
 if(!isset($_SESSION['mem'])){
     to("?do=login");
 }
-dd($_GET);
+
+if(empty($_SESSION['cart'])){
+    echo "<h2 class='ct'>購物車為空</h2>";
+}else{
 ?>
-<h2 class="ct">XXX購物車</h2>
+<h2 class="ct"><?=$_SESSION['mem'];?>購物車</h2>
 
 <table class="all">
     <tr class="tt ct">
@@ -12,15 +20,37 @@ dd($_GET);
         <th>產品名稱</th>
         <th>數量</th>
         <th>庫存量</th>
+        <th>規格</th>
+        <th>單價</th>
         <th>小計</th>
         <th>刪除</th>
     </tr>
+<?php
+foreach($_SESSION['cart'] as $id => $qt){
+    $row = $Goods->find($id);
+?>
+
+
     <tr class="pp ct">
-        <td>編號</td>
-        <td>產品名稱</td>
-        <td>數量</td>
+        <td><?=$row['no'];?></td>
+        <td><?=$row['name'];?></td>
+        <td><?=$qt;?></td>
         <td>庫存量</td>
-        <td>小計</td>
-        <td>刪除</td>
+        <td><?=$row['spec'];?></td>
+        <td><?=$row['price'];?></td>
+        <td><?=$row['price']*$qt;?></td>
+        <td>
+            <img src="./icon/0415.jpg" alt="">
+        </td>
     </tr>
-</table>
+
+<?php
+}
+echo "</table>";
+}
+?>
+
+<div class="ct">
+    <a href="index.php"><img src="./icon/0411.jpg" alt=""></a>
+    <a href="?do=checkout"><img src="./icon/0412.jpg" alt=""></a>
+</div>
