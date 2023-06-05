@@ -70,7 +70,7 @@ foreach($_SESSION['cart'] as $id => $qt){
             total:<?=$sum;?>,
         }
         $.post('./api/save_order.php',form,(res)=>{
-            console.log(res);
+            // console.log(res);
             alert('訂購成功');
         })
     }
