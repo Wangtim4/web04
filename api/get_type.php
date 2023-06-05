@@ -2,7 +2,7 @@
 include_once "../base.php";
 
 $type=$_GET['type'];
-$parent=$GET['parent'];
+$parent=$_GET['parent'];
 $rows=[];
 switch($type){
     case 'big':
@@ -10,6 +10,7 @@ switch($type){
         break;
     case 'mid':
         $rows=$Type->all(['parent'=>$parent]);
+        dd($rows);
         break;
 }
 

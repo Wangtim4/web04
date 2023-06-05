@@ -63,7 +63,7 @@ div.ww:hover > div.s
 	display:inline-block;
 	width:65%;
 	padding:2%;
-	min-height:550px;
+	max-height:500px;
 	border:#000 1px solid;
 	overflow: auto;
 }
